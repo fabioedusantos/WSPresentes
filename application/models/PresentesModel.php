@@ -15,9 +15,9 @@ class PresentesModel extends CI_Model {
         $query .= "ORDER BY dataCadastro DESC";
 
         $query = $this->db->query($query);
-        if (empty($query->result_array())) return null;
+        if (empty($query->result_array())) return array();
 
-        return count($query->result_array()) == 1 ? $query->result_array()[0] : $query->result_array();
+        return count($query->result_array()) == 1 && !empty($id) ? $query->result_array()[0] : $query->result_array();
     }
 
     public function insert($data) {
