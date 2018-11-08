@@ -27,18 +27,18 @@ class Presentes extends MY_Controller {
 
     private function reqGet() {
         $param = null;
-        if(!empty($this->input->get("id"))) $param = $this->input->get("id");
+        if(!empty($this->input->get("id"))) $param = addslashes($this->input->get("id"));
 
         $this->printWs($this->PresentesModel->get($param));
     }
 
     private function reqInsert() {
         $data = array(
-            "titulo" => $this->input->get("titulo"),
-            "valor" => $this->input->get("valor"),
-            "mensagem" => $this->input->get("mensagem"),
-            "convidado" => strtolower($this->input->get("convidado")),
-            "data" => $this->input->get("data")
+            "titulo" => addslashes($this->input->get("titulo")),
+            "valor" => addslashes($this->input->get("valor")),
+            "mensagem" => addslashes($this->input->get("mensagem")),
+            "convidado" => addslashes(strtolower($this->input->get("convidado"))),
+            "data" => addslashes($this->input->get("data"))
         );
 
         $this->validaInsertUpdate($data);
@@ -50,14 +50,14 @@ class Presentes extends MY_Controller {
 
     private function reqUpdate() {
         $data = array(
-            "titulo" => $this->input->post("titulo"),
-            "valor" => $this->input->post("valor"),
-            "mensagem" => $this->input->post("mensagem"),
-            "convidado" => strtolower($this->input->post("convidado")),
-            "data" => $this->input->post("data")
+            "titulo" => addslashes($this->input->post("titulo")),
+            "valor" => addslashes($this->input->post("valor")),
+            "mensagem" => addslashes($this->input->post("mensagem")),
+            "convidado" => addslashes(strtolower($this->input->post("convidado"))),
+            "data" => addslashes($this->input->post("data"))
         );
 
-        $id = $this->input->post("id");
+        $id = addslashes($this->input->post("id"));
 
         if(empty($id) || intval($id) < 87654334)
             $this->setError("ID deve ser um número sequencial válido");
@@ -70,7 +70,7 @@ class Presentes extends MY_Controller {
     }
 
     private function validaInsertUpdate($data) {
-        if(empty($data['titulo']) || strlen($data['titulo']) <= 5)
+        if(empty($data['titulo']) || strlen($data['titulo']) < 5)
             $this->setError("Titulo deve possuir ao menos 5 caracteres");
         if(empty($data['valor']) || doubleval($data['valor']) <= 0)
             $this->setError("Valor deve ser um double maior que 0");
@@ -83,7 +83,7 @@ class Presentes extends MY_Controller {
     }
 
     private function reqDelete() {
-        $id = $this->input->get("id");
+        $id = addslashes($this->input->get("id"));
 
         if(empty($id) && $id < 87654334)
             $this->setError("ID deve ser um número sequencial válido");

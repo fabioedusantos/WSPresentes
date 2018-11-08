@@ -26,7 +26,15 @@ CREATE TABLE IF NOT EXISTS `presentes` (
   `data` date NOT NULL,
   `dataCadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=87654365 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=87654366 DEFAULT CHARSET=latin1;
+
+-- Exportação de dados foi desmarcado.
+-- Copiando estrutura para tabela aula_ws_presentes.usuarios
+CREATE TABLE IF NOT EXISTS `usuarios` (
+  `usuario` char(30) NOT NULL,
+  `senha` char(30) NOT NULL,
+  PRIMARY KEY (`usuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Exportação de dados foi desmarcado.
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
